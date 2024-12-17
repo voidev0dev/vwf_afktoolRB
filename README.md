@@ -7,7 +7,7 @@
 
 **-✅OPEN SOURCE**
 ---------------------------
-**-✅NOT BANNED BY ROBLOX**
+**-✅DOESNT BREAKS ROBLOX RULES**
 ---------------------------
 **-✅100% SAFE**
 ---------------------------
