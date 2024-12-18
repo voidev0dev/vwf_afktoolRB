@@ -1,4 +1,4 @@
-# PL$ ROBUX
+ # PL$ ROBUX
 ## 💥!!THATS NOT A SCRIPT, WORKS DIRRECTLY ON APP!!💥
 ### 🛡️Discord: https://discord.gg/JwhYyzHnMh
 
@@ -35,8 +35,7 @@
 - App doesnt launchs or doesnt works correctly.
 
 *Report us and read FAQ.*
-
-
+---------------------------
 # Problematic issues
 - App doesnt  shows at the task panel, minimize and unfold it on the desktop
 - Requires Windows 10 +
