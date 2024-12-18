@@ -33,8 +33,10 @@
 *Our app doesnt breaks Roblox rules, because its not a script.*
 -----------------------------------------------------------------------------------------------------------
 - App doesnt launchs or doesnt works correctly.
- -----------------------------------------------------------------------------------------------------------
+
+
 ***Report us and read FAQ***
+
 
 # Problematic issues
 - App doesnt  shows at the task panel, minimize and unfold it on the desktop
