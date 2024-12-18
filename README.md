@@ -34,8 +34,7 @@
 -----------------------------------------------------------------------------------------------------------
 - App doesnt launchs or doesnt works correctly.
 
-
-***Report us and read FAQ***
+*Report us and read FAQ.*
 
 
 # Problematic issues
