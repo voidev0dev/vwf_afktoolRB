@@ -19,19 +19,29 @@ def start_afk_main():
             keyboard.press_and_release('s')
     except:
         root.destroy()
-        ErrorWindow(width=500, height=500, text="Something went wrong with <STEALTHY_ANTI_KICK>. Please reload the app", bg="gray10", text_font="Trebuchet 10 bold", button_height=3, button_width=20)
+        ErrorWindow(width=500, height=500, text="Something went wrong with <STEALTHY_ANTI_KICK>. Please reload the app and report us in discord server.", bg="gray10", text_font="Trebuchet 10 bold", button_height=3, button_width=20)
         sys.exit()
         
 def text_main():
-    pid = os.getpid()
     try:
         while True:
-            text_enter_got = text_enter.get()
+            text_enter_got_1 = text_enter_1.get()
+            text_enter_got_2 = text_enter_2.get()
+            
+            if text_enter_got_1 or text_enter_got_2 == None:
+                ErrorWindow(width=500, height=500, text="Text entry cant be empty. Please reload the app", bg="gray10", text_font="Trebuchet 10 bold", button_height=3, button_width=20)
+            
             text_sec_enter_got = int(text_sec_enter.get())
             time.sleep(text_sec_enter_got)
             keyboard.press_and_release("/")
             time.sleep(1)
-            keyboard.write(text_enter_got)
+            keyboard.write(text_enter_got_1)
+            time.sleep(1)
+            keyboard.press_and_release("Enter")
+            time.sleep(text_sec_enter_got)
+            keyboard.press_and_release("/")
+            time.sleep(1)
+            keyboard.write(text_enter_got_2)
             time.sleep(1)
             keyboard.press_and_release("Enter")
     except:
@@ -84,27 +94,15 @@ def deploy():
 
 # WINDOW  
 root = Tk()
-root.geometry("500x600")
+root.geometry("500x600+600+200")
 root.resizable(False, False)
 root['bg']='gray10'
 root.title("PL$ ROBUX")
 root.overrideredirect(True)
 
 frame_title = Frame(
-                    root, 
-                    bg="black"
-)
-
-close = Button(
-    frame_title,
-    text="×",
-    borderwidth=0,
-    font="Trebuchet 15 bold",
-    bg='black',
-    fg='white',
-    activebackground='black',
-    activeforeground='red',
-    command=stop
+root, 
+bg="black"
 )
 
 mini = Button(
@@ -119,6 +117,18 @@ mini = Button(
     command=minimize
 )
 
+close = Button(
+    frame_title,
+    text="×",
+    borderwidth=0,
+    font="Trebuchet 15 bold",
+    bg='black',
+    fg='white',
+    activebackground='black',
+    activeforeground='red',
+    command=stop
+)
+
 frame_text = Label(
     frame_title,
     text="PL$ ROBUX [v 0.0.0 BETA]",
@@ -127,29 +137,28 @@ frame_text = Label(
     fg="white"
 )
 
-
 panel = Tk()
-panel.geometry("50x50")
+panel.geometry("50x70")
 panel.resizable(False, False)
 panel['bg'] = 'black'
 panel.overrideredirect(True)
 
-
 panel_button = Button(
     panel,
     text="+",
-    font="Trebuchet 15 bold",
+    font="Trebuchet 30 bold",
     borderwidth=0,
     width=3,
-    height=2,
+    height=5,
     bg='black',
     fg='white',
-    command=deploy
+    command=deploy,
+    activebackground="white",
+    activeforeground="black"
 )
 panel_button.pack()
 
 frame_title.pack(anchor=N, fill=BOTH)
-
 close.pack(side=RIGHT)
 mini.pack(side=RIGHT)
 frame_text.place(y=7, x=10)
@@ -165,7 +174,7 @@ frame_title.bind("<B1-Motion>", set_pos)
 root.bind('<Escape>', stop)
 
 # IMAGES
-enter_img = ImageTk.PhotoImage(file="img/enter.png")
+enter_img = ImageTk.PhotoImage(file="img/start.png")
 start_img = ImageTk.PhotoImage(file="img/start.png")
 
 # BUTTONS
@@ -185,7 +194,14 @@ start = Button(
     image=start_img
 )
 
-text_enter = Entry(
+text_enter_1 = Entry(
+    borderwidth=3,
+    relief='solid',
+    width=20,
+    font="Trebuchet 10 bold"
+)
+
+text_enter_2 = Entry(
     borderwidth=3,
     relief='solid',
     width=20,
@@ -197,8 +213,8 @@ enter = Button(
     bg="gray10",
     fg="red",
     borderwidth=0,
-    highlightbackground="red",
-    highlightcolor="red",
+    highlightbackground="gray10",
+    highlightcolor="gray10",
     highlightthickness=0,
     width=150,
     height=60,
@@ -209,11 +225,27 @@ enter = Button(
 )
 
 text_spam = Label(
-    text="TEXT",
+    text="TEXTS",
     borderwidth=0,
     bg='gray10',
     fg='black',
     font="Courier 30 bold",
+)
+
+entry_1 = Label(
+    text="1",
+    borderwidth=0,
+    bg="gray10",
+    fg="black",
+    font="Courier 20 bold"
+)
+
+entry_2 = Label(
+    text="2",
+    borderwidth=0,
+    bg="gray10",
+    fg="black",
+    font="Courier 20 bold"
 )
 
 text_sec_enter = Entry(
@@ -267,7 +299,10 @@ start_emotion = Button(
     )
 
 text_spam.pack(pady=10)
-text_enter.pack(pady=10)
+text_enter_1.pack(pady=10)
+text_enter_2.pack(pady=10)
+entry_1.place(x=153, y=113)
+entry_2.place(x=153, y=156)
 text_sec.pack(pady=10)
 text_sec_enter.pack(pady=10)
 
