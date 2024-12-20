@@ -171,15 +171,15 @@ frame_text.place(y=7, x=10)
 ×-+
 '''
 
-icon_img = ImageTk.PhotoImage(file="pl$ robux/img/icon.png")
+icon_img = ImageTk.PhotoImage(file="img/icon.png")
 root.iconphoto(False, icon_img)
 
 frame_title.bind("<B1-Motion>", set_pos)
 root.bind('<Escape>', stop)
 
 # IMAGES
-enter_img = ImageTk.PhotoImage(file="pl$ robux/img/start.png")
-start_img = ImageTk.PhotoImage(file="pl$ robux/img/start.png")
+enter_img = ImageTk.PhotoImage(file="img/start.png")
+start_img = ImageTk.PhotoImage(file="img/start.png")
 
 # BUTTONS
 start = Button(
