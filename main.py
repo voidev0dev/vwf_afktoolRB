@@ -19,7 +19,7 @@ def start_afk_main():
             keyboard.press_and_release('s')
     except:
         root.destroy()
-        ErrorWindow(width=500, height=500, text="Something went wrong with <STEALTHY_ANTI_KICK>. Please reload the app and report us in discord server.", bg="gray10", text_font="Trebuchet 10 bold", button_height=3, button_width=20)
+        #ErrorWindow(width=500, height=500, text="Something went wrong with <STEALTHY_ANTI_KICK>. Please reload the app and report us in discord server.", bg="gray10", text_font="Trebuchet 10 bold", button_height=3, button_width=20)
         sys.exit()
         
 def text_main():
@@ -27,12 +27,13 @@ def text_main():
         while True:
             text_enter_got_1 = text_enter_1.get()
             text_enter_got_2 = text_enter_2.get()
-            
-            if text_enter_got_1 or text_enter_got_2 == None:
-                ErrorWindow(width=500, height=500, text="Text entry cant be empty. Please reload the app", bg="gray10", text_font="Trebuchet 10 bold", button_height=3, button_width=20)
+            if text_enter_got_1 or text_enter_got_2 or text_enter_got_1 and text_enter_got_2 == None:
+                pass
+                #root.destroy()
+                #ErrorWindow(width=500, height=500, text="Text entry cant be empty. Please reload the app", bg="gray10", text_font="Trebuchet 10 bold", button_height=3, button_width=20)
             
             text_sec_enter_got = int(text_sec_enter.get())
-            time.sleep(text_sec_enter_got)
+            time.sleep(int(text_sec_enter_got))
             keyboard.press_and_release("/")
             time.sleep(1)
             keyboard.write(text_enter_got_1)
@@ -45,8 +46,10 @@ def text_main():
             time.sleep(1)
             keyboard.press_and_release("Enter")
     except:
-        ErrorWindow(width=500, height=500, text="Something went wrong with <TEXT>. Please reload the app", bg="gray10", text_font="Trebuchet 10 bold", button_height=3, button_width=20)
-        sys.exit()
+        pass
+        #root.destroy()
+        #ErrorWindow(width=500, height=500, text="Something went wrong with <TEXT>. Please reload the app", bg="gray10", text_font="Trebuchet 10 bold", button_height=3, button_width=20)
+        #sys.exit()
 
 def text():
     text_thread = threading.Thread(target=text_main)
@@ -99,6 +102,7 @@ root.resizable(False, False)
 root['bg']='gray10'
 root.title("PL$ ROBUX")
 root.overrideredirect(True)
+
 
 frame_title = Frame(
 root, 
@@ -167,15 +171,15 @@ frame_text.place(y=7, x=10)
 ×-+
 '''
 
-icon_img = ImageTk.PhotoImage(file="img/icon.png")
+icon_img = ImageTk.PhotoImage(file="pl$ robux/img/icon.png")
 root.iconphoto(False, icon_img)
 
 frame_title.bind("<B1-Motion>", set_pos)
 root.bind('<Escape>', stop)
 
 # IMAGES
-enter_img = ImageTk.PhotoImage(file="img/start.png")
-start_img = ImageTk.PhotoImage(file="img/start.png")
+enter_img = ImageTk.PhotoImage(file="pl$ robux/img/start.png")
+start_img = ImageTk.PhotoImage(file="pl$ robux/img/start.png")
 
 # BUTTONS
 start = Button(
