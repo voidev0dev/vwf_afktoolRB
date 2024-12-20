@@ -3,7 +3,7 @@
 ### 🛡️Discord: https://discord.gg/JwhYyzHnMh
 
 ### Introduction
-*If you're an active Roblox player and sometimes you being AFK in PLS DONATE probably you could see bots, automatically writing texts, playing animations and etc. Want too something like that? Use PL$ ROBUX!*
+*If you're an active Roblox player and sometimes you being AFK in PLS DONATE (by @haz3mn) probably you could see bots, automatically writing texts, playing animations and etc. Want too something like that? Use PL$ ROBUX!*
 
 **-✅OPEN SOURCE**
 ---------------------------
