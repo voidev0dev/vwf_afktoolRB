@@ -38,6 +38,6 @@
 ---------------------------
 # Problematic issues
 - App doesnt  shows at the task panel, minimize and unfold it on the desktop
-- Requires Windows 10 +
+- Requires Windows 7 +
 - Thats a BETA Test only
 - App is not totally automatic (most controlled by user)
