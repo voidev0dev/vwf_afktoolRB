@@ -14,7 +14,7 @@
 # Quick answers
 - Why i dont see the icon on task panel?
  
-*You cant minimize window trought the task panel, but you can deploy/minimize it dirrectly on the desktop.*
+*Due to Windows-Security problematic issues to our App you won't see app icon on the task panel, check upper left corner of screen.*
 -----------------------------------------------------------------------------------------------------------
 - Is not program malicious?
 
