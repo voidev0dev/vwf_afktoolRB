@@ -1,4 +1,3 @@
- # PL$ ROBUX
 ## 💥!!THATS NOT A SCRIPT, WORKS DIRRECTLY ON APP!!💥
 ### 🛡️Discord: https://discord.gg/JwhYyzHnMh
 
