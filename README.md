@@ -1,7 +1,5 @@
-## 💥!!THATS NOT A SCRIPT, WORKS DIRRECTLY ON APP!!💥
+## HOW DOES APP WORKS: APP -> PC -> ROBLOX
 ### 🛡️Discord: https://discord.gg/JwhYyzHnMh
-
-### YOU CAN IMAGINE HOW TO USE IT
 
 **-✅OPEN SOURCE**
 ---------------------------
