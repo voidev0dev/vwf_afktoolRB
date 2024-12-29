@@ -1,5 +1,5 @@
 ## HOW DOES APP WORKS: APP -> PC -> ROBLOX
-### 🛡️Discord: https://discord.gg/JwhYyzHnMh
+## 🛡️Discord: https://discord.gg/JwhYyzHnMh
 
 **-✅OPEN SOURCE**
 ---------------------------
