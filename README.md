@@ -31,9 +31,3 @@
 - App doesnt launchs or doesnt works correctly.
 
 *Report us and read FAQ.*
----------------------------
-# Problematic issues
-- App doesnt  shows at the task panel, minimize and unfold it on the desktop
-- Requires Windows 7 +
-- Thats a BETA Test only
-- App is not totally automatic (most controlled by user)
