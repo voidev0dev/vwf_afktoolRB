@@ -7,11 +7,19 @@ import sys
 from PIL import ImageTk
 import signal
 import webbrowser
+import win32gui
+import pyautogui
+from OStypeError import *
+
+if sys.platform != "win32":
+    OsTypeError()
 
 #FUNCTIONS
 stop_event = threading.Event()
 def kill_thread():
-    stop_event.set()
+    threading.Thread(target=root.destroy()).start()
+    os._exit(1)
+    sys.exit()
 
 def on_focus_hotkey(event):
     if event.widget == set_hotkey_text:
@@ -56,7 +64,7 @@ def stop_capture_text():
     if is_capturing:
       is_capturing = False
 
-    if capture_timer:
+    elif capture_timer:
       capture_timer.cancel()
         
     set_hotkey_text.configure(text=captured_key_text)
@@ -69,7 +77,7 @@ def on_press_text(event_text):
             just_captured_text = True
             return
         
-    if captured_key_text == event_text.name and not just_captured_text:
+    elif captured_key_text == event_text.name and not just_captured_text:
         text()
     just_captured_text = False
     
@@ -90,7 +98,7 @@ def stop_capture_afk():
     if is_capturing:
       is_capturing = False
 
-    if capture_timer:
+    elif capture_timer:
       capture_timer.cancel()
 
     set_hotkey_afk.configure(text=captured_key_afk)
@@ -102,7 +110,7 @@ def on_press_afk(event_afk):
         just_captured_afk = True
         return
     
-    if captured_key_afk == event_afk.name and not just_captured_afk:
+    elif captured_key_afk == event_afk.name and not just_captured_afk:
         start_afk()
 
 def activate_capture_afk():
@@ -122,7 +130,7 @@ def stop_capture_dance():
     if is_capturing:
       is_capturing = False
 
-    if capture_timer:
+    elif capture_timer:
       capture_timer.cancel()
 
     set_hotkey_dance.configure(text=captured_key_dance)
@@ -134,7 +142,7 @@ def on_press_dance(event_dance):
         just_captured_dance = True
         return
     
-    if captured_key_dance == event_dance.name and not just_captured_dance:
+    elif captured_key_dance == event_dance.name and not just_captured_dance:
         dance()
 
 def activate_capture_dance():
@@ -143,24 +151,29 @@ def activate_capture_dance():
 
 
 def start_afk_main(event=None):
+    start.configure(state="disabled")
     try:
         while True:
-                time.sleep(100)
+                time.sleep(535)
                 keyboard.press_and_release("w")
-                time.sleep(100)
+                time.sleep(535)
                 keyboard.press_and_release('s')
     except:
         pass
         
 def text_main(event=None):
+    enter.configure(state="disabled")
     try:
         while True:
                 text_enter_got_1 = text_enter_1.get()
                 text_enter_got_2 = text_enter_2.get()
-                if text_enter_got_1 or text_enter_got_2 or text_enter_got_1 and text_enter_got_2 == None:
+                if text_enter_got_1 or text_enter_got_2 == None:
                     pass
+                    return
                 
                 text_sec_enter_got = text_sec_enter.get()
+                if text_sec_enter_got == 0:
+                    return
                 
                 time.sleep(int(text_sec_enter_got))
                 keyboard.press_and_release("/")
@@ -180,11 +193,13 @@ def text_main(event=None):
         pass
 
 def dance_main(event=None):
+    emotion_start.configure(state="disabled")
     try:
         dance_got = int(emotion_entry.get())
                     
-        if dance_got == str or dance_got == None:
-                pass
+        if dance_got == 0 or dance_got == '':
+            pass
+            return
                     
         time.sleep(4)
         keyboard.press_and_release("/")
@@ -274,12 +289,11 @@ def stop_move(event):
 def minimize():
     root.state('withdrawn')
     root.overrideredirect(True)
-
-def deploy():
+    
+def restore():
     root.state("normal")
     root.overrideredirect(True)
-
-
+        
 def clear_main_1(event=None):
     try:
         if text_enter_1.get() == bgtext:
@@ -311,13 +325,13 @@ def clear_main_2(event=None):
 def add_seconds_main(event=None):
     try:
         if text_sec_enter.get() == '':
-            text_sec_enter.insert(0, bgsec)
+            text_sec_enter.insert(0, "0")
     except:
         None
         
 def clear_seconds_main(event=None):
     try:
-        if text_sec_enter.get() == bgsec:
+        if text_sec_enter.get() == "0":
             text_sec_enter.delete(0, END)
     except:
         None
@@ -325,13 +339,13 @@ def clear_seconds_main(event=None):
 def add_dance_main(event=None):
     try:
         if emotion_entry.get() == '':
-            emotion_entry.insert(0, bgdance)
+            emotion_entry.insert(0, 0)
     except:
         None
         
 def clear_dance_main(event=None):
     try:
-        if emotion_entry.get() == bgdance:
+        if emotion_entry.get() == "0":
             emotion_entry.delete(0, END)
     except:
         None
@@ -375,7 +389,7 @@ def config_bg():
         text_sec.configure(bg="grey10")
         emotion.configure(bg="grey10")
         stealth_antikick.configure(bg="grey10")
-        moon.configure(bg="grey10", image=sun_img, activebackground='grey10', activeforeground='GhostWhite')
+        moon.configure(bg="grey10", image=sun_afk_img, activebackground='grey10', activeforeground='GhostWhite')
         stop_button.configure(bg="grey10", activebackground="grey10")
         stop_button_2.configure(bg="grey10", activebackground="grey10")
         stop_button_3.configure(bg="grey10", activebackground="grey10")
@@ -399,7 +413,7 @@ def config_bg():
         stop_button.configure(bg="GhostWhite", activebackground="GhostWhite")
         stop_button_2.configure(bg="GhostWhite", activebackground="GhostWhite")
         stop_button_3.configure(bg="GhostWhite", activebackground="GhostWhite")
-        moon.configure(bg="GhostWhite", image=moon_img, activebackground='GhostWhite', activeforeground='grey10')
+        moon.configure(bg="GhostWhite", image=moon_afk_img, activebackground='GhostWhite', activeforeground='grey10')
         set_hotkey_text.configure(bg="GhostWhite", activebackground="GhostWhite", fg='black', activeforeground='black')
         set_hotkey_afk.configure(bg="GhostWhite", activebackground="GhostWhite", fg='black', activeforeground='black')
         set_hotkey_dance.configure(bg="GhostWhite", activebackground="GhostWhite", fg='black', activeforeground='black')
@@ -420,6 +434,40 @@ def config_btn_main():
 def config_btn():
     threading.Thread(target=config_btn_main).start()
 
+screen_cords_x = pyautogui.resolution()[0]
+screen_center_x = int(screen_cords_x/2)
+
+screen_cords_y = pyautogui.resolution()[1]
+screen_center_y = int(screen_cords_y/2)
+
+position = 1
+def replace(event=None):
+    global position
+    if position == 1:
+        panel.geometry(f"+{screen_center_x}+0")
+        position = 2
+        return
+            
+    elif position == 2:
+        panel.geometry(f"+{screen_center_x+screen_center_x-30}+0")
+        position = 3
+        return
+
+    elif position == 3:
+        panel.geometry(f"+0+{screen_cords_y-77}")
+        position = 4
+        return
+
+    elif position == 4:
+        panel.geometry(f"+{screen_center_x+screen_center_x-30}+{screen_center_y+screen_center_y-77}")
+        position = 5
+        return
+    
+    elif position == 5:
+        panel.geometry(f"30x30+0+0")
+        position = 1
+        return
+
 # WINDOW
 root = Tk()
 root.geometry("500x900+700+100")
@@ -429,9 +477,10 @@ root.title("afktoolRB")
 root.overrideredirect(True)
 root.attributes("-topmost", True)
 
+
 frame_title = Frame(
-root, 
-bg="black"
+    root, 
+    bg="black"
 )
 
 mini = Button(
@@ -458,64 +507,51 @@ close = Button(
     command=stop
 )
 
-frame_snowflake = Label(
+frame_text = Label(
     frame_title,
-    text="❄️",
-    borderwidth=0,
-    font="Trebuchet 15 bold",
-    bg='black',
-    fg='cyan',
-    activebackground='black',
-    activeforeground='cyan'
-)
-
-frame_v = Label(
-    frame_title,
-    text="v",
-    bg="black",
-    fg="RoyalBlue4",
-    font="Courier 13 bold",
-    borderwidth=0
-)
-
-frame_w = Label(
-    frame_title,
-    text="w",
-    bg="black",
-    fg="DarkGreen",
-    font="Courier 13 bold",
-    borderwidth=0
-)
-
-frame_f = Label(
-    frame_title,
-    text="f",
-    bg="black",
-    fg="firebrick4",
-    font="Courier 13 bold",
-    borderwidth=0
-)
-
-frame_text = Button(
-    frame_title,
-    text="_afktoolRB",
+    text="AfkToolRB",
     font="Courier 12 bold",
     bg="black", 
     fg="white",
     borderwidth=0,
     activeforeground='white',
     activebackground='black',
-    command=lambda: webbrowser.open_new_tab("https://discord.gg/eeYQkgFRAk")
 )
 
 frame_version = Label(
     frame_title,
-    text="[v1.3]",
+    text="[v1.4] by",
     font="Courier 12 bold",
     bg='black',
     fg='white',
     borderwidth=0
 )
+
+frame_team = Button(
+    frame_title,
+    text="VWF Team",
+    font="Courier 12 bold",
+    borderwidth=0,
+    highlightthickness=0,
+    activebackground="black",
+    bg="black",
+    activeforeground="blue",
+    fg="light sky blue",
+    command=lambda: webbrowser.open_new_tab("https://discord.gg/eeYQkgFRAk")
+)
+
+frame_title.pack(anchor=N, fill=BOTH)
+close.pack(side=RIGHT)
+mini.pack(side=RIGHT)
+frame_text.place(y=9, x=3)
+frame_version.place(y=9, x=105)
+frame_team.place(y=6, x=203)
+
+frame_title.bind("<Button-1>", start_move)
+frame_title.bind("<B1-Motion>", move)
+frame_title.bind("<ButtonRelease-1>", stop_move)
+
+root.bind('<Escape>', stop)
 
 panel = Tk()
 panel.geometry("30x30")
@@ -523,8 +559,6 @@ panel.resizable(False, False)
 panel['bg'] = 'black'
 panel.overrideredirect(True)
 panel.attributes("-topmost", True)
-
-icon_img = ImageTk.PhotoImage(file="img/icon.png")
 
 panel_button = Button(
     panel,
@@ -535,35 +569,19 @@ panel_button = Button(
     height=5,
     bg='black',
     fg='white',
-    command=deploy,
+    command=restore,
     activebackground="black",
-    activeforeground="black",
+    activeforeground="white",
 )
 panel_button.pack()
 
-frame_title.pack(anchor=N, fill=BOTH)
-close.pack(side=RIGHT)
-mini.pack(side=RIGHT)
-frame_snowflake.place(y=5, x=0),
-frame_v.place(y=7, x=25)
-frame_w.place(y=7, x=40)
-frame_f.place(y=7, x=55)
-frame_text.place(y=5, x=65)
-frame_version.place(y=9, x=175)
-
-root.iconphoto(False, icon_img)
-
-frame_title.bind("<Button-1>", start_move)
-frame_title.bind("<B1-Motion>", move)
-frame_title.bind("<ButtonRelease-1>", stop_move)
-
-root.bind('<Escape>', stop)
+panel_button.bind("<Button-2>", replace)
 
 # IMAGES
-start_img = ImageTk.PhotoImage(file="img/start.png")
-moon_img = ImageTk.PhotoImage(file="img/moon.png")
-sun_img = ImageTk.PhotoImage(file="img/sun.png")
-stop_img = ImageTk.PhotoImage(file="img/stop.png")
+start_afk_img = ImageTk.PhotoImage(file="img/start.png")
+moon_afk_img = ImageTk.PhotoImage(file="img/moon.png")
+sun_afk_img = ImageTk.PhotoImage(file="img/sun.png")
+stop_afk_img = ImageTk.PhotoImage(file="img/stop.png")
 
 # BUTTONS
 start = Button(
@@ -579,7 +597,7 @@ start = Button(
     activebackground="GhostWhite",
     activeforeground="red",
     command=start_afk,
-    image=start_img
+    image=start_afk_img
 )
 
 bgtext = 'Your text here'
@@ -622,7 +640,7 @@ enter = Button(
     activebackground="GhostWhite",
     activeforeground="red",
     command=text,
-    image=start_img
+    image=start_afk_img
 )
 
 text_spam = Label(
@@ -770,12 +788,12 @@ emotion_start = Button(
     activebackground="GhostWhite",
     activeforeground="red",
     command=dance,
-    image=start_img
+    image=start_afk_img
 )
 
 stop_button = Button(
     root,
-    image=stop_img,
+    image=stop_afk_img,
     font="Courier 15 bold",
     fg="red",
     bg="GhostWhite",
@@ -786,7 +804,7 @@ stop_button = Button(
 
 stop_button_2 = Button(
     root,
-    image=stop_img,
+    image=stop_afk_img,
     font="Courier 15 bold",
     fg="red",
     bg="GhostWhite",
@@ -798,7 +816,7 @@ stop_button_2 = Button(
 
 stop_button_3 = Button(
     root,
-    image=stop_img,
+    image=stop_afk_img,
     font="Courier 15 bold",
     fg="red",
     bg="GhostWhite",
@@ -815,7 +833,7 @@ moon = Button(
     activebackground='GhostWhite',
     activeforeground='Black',
     highlightthickness=0,
-    image=moon_img,
+    image=moon_afk_img,
     command=config_bg
 )
 
@@ -840,5 +858,4 @@ emotion_entry.pack()
 emotion_start.pack(pady=10)
 stop_button_3.pack()
 
-threading.Thread(target=root.mainloop())
-threading.Thread(target=panel.mainloop())
+threading.Thread(target=root.mainloop()).start()
